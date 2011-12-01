@@ -1,0 +1,25 @@
+POMODORO KATA: Un pomodoro en un pomodoro
+
+El 22 de diciembre de 2009 se celebró en Madrid (España) el primer coding dojo organizado por AGILISMO.ES. Para ese evento Xavi Gost y Jose Manuel Beas se inventaron una kata que hoy reeditamos para cerrar este maravilloso año de 12meses12katas.
+
+El objetivo de esta PomodoroKata es desarrollar (haciendo TDD, por supuesto) un programa que reproduzca el comportamiento de un temporizador como el que usamos cuando practicamos la Técnica Pomodoro, es decir, un simple reloj de cocina.
+
+Os proponemos los siguientes comportamientos, pero podéis usar los que queráis siempre y cuando cumplan con la restricción añadida de que la escritura de la kata no dure más de un pomodoro (25 minutos). De ahí el subtítulo de "Un pomodoro en un pomodoro".
+CREAR UN POMODORO
+Un pomodoro dura 25 minutos por defecto
+Puedo crear un pomodoro con cualquier duración
+PARAR UN POMODORO
+Un pomodoro recién creado está parado
+Al arrancar un pomodoro comienza la cuenta atrás
+Un pomodoro no termina si no ha sido arrancado previamente
+Un pomodoro acaba cuando se agota su tiempo
+Un pomodoro no acaba mientras no se agote su tiempo
+INTERRUPCIONES
+Un pomodoro se inicia sin interrupciones
+Si no está arrancado no se puede interrumpir
+El pomodoro cuenta las interrupciones (1, 2...)
+REINICIAR
+Un pomodoro ya arrancado se reinicia (empieza a contar el tiempo) al arrancarlo de nuevo
+Un pomodoro se reinicia sin interrupciones
+
+Como "bonus track" se propone crear la UI, que puede ser gráfica, linea de comandos o como desee cada cuál, pero ya sin la restricción de que dure un pomodoro todo el ejercicio.
