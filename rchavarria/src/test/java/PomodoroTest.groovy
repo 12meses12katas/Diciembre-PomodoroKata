@@ -16,5 +16,14 @@ class PomodoroTest {
     public void testDefaultTimeLeft() {
         assertEquals(25 * 60, pomodoro.secondsLeft())
     }
+    
+    @Test
+    public void testDefineDuration() {
+        def newDuration = 150
+        assertEquals(newDuration, new Pomodoro(secondsLeft : newDuration).secondsLeft())
+        
+        def otherDuration = 123456
+        assertEquals(otherDuration, new Pomodoro(secondsLeft : otherDuration).secondsLeft())
+    }
 
 }
