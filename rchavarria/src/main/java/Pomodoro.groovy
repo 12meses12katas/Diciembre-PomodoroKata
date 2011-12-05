@@ -7,4 +7,8 @@ class Pomodoro {
     public int secondsLeft() {
         secondsLeft
     }
+    
+    public PomodoroStates getState() {
+        return PomodoroStates.STOPPED
+    }
 }

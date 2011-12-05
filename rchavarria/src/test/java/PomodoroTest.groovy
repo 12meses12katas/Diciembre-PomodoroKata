@@ -25,5 +25,10 @@ class PomodoroTest {
         def otherDuration = 123456
         assertEquals(otherDuration, new Pomodoro(secondsLeft : otherDuration).secondsLeft())
     }
+    
+    @Test
+    public void testJustCreatedPomodoroIsStopped() {
+        assertEquals(PomodoroStates.STOPPED, pomodoro.getState())
+    }
 
 }
