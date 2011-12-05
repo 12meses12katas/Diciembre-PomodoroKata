@@ -30,5 +30,11 @@ class PomodoroTest {
     public void testJustCreatedPomodoroIsStopped() {
         assertEquals(PomodoroStates.STOPPED, pomodoro.getState())
     }
+    
+    @Test
+    public void testWhenStartingPomodoroIsActive() {
+        pomodoro.start()
+        assertEquals(PomodoroStates.ACTIVE, pomodoro.getState())
+    }
 
 }
