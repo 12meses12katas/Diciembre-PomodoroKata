@@ -76,5 +76,14 @@ class PomodoroTest {
     public void testPomodoroAllowInterruptionsIfStarted() {
         pomodoro.start()
         pomodoro.interrupt()
+        assertEquals(1, pomodoro.interruptions())
+    }
+    
+    @Test
+    public void testPomodoroCountsInterruptions() {
+        pomodoro.start()
+        def count = 5
+        (1..count).each { pomodoro.interrupt() }
+        assertEquals(count, pomodoro.interruptions())
     }
 }

@@ -6,6 +6,7 @@ class Pomodoro {
     
     private secondsLeft = DEFAULT_SECONDS_LEFT
     private state = PomodoroStates.STOPPED
+    private interruptions = 0
     
     public int secondsLeft() {
         secondsLeft
@@ -29,11 +30,13 @@ class Pomodoro {
     }
     
     public int interruptions() {
-        0
+        interruptions
     }
     
     public interrupt() {
-        if(! PomodoroStates.ACTIVE == getState())
+        if(! (PomodoroStates.ACTIVE == getState()))
             throw new Exception("Pomodoro not started")
+        
+        interruptions++
     }
 }
