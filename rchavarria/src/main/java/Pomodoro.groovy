@@ -49,6 +49,7 @@ class Pomodoro {
     
     public reset() {
         timer.cancel()
+        interruptions = 0
         start()
     }
 }

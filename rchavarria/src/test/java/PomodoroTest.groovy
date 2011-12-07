@@ -107,4 +107,19 @@ class PomodoroTest {
         
         assertEquals(PomodoroStates.FINISHED, fiveSecondsPomodoro.getState())
     }
+    
+    @Test
+    public void testPomodoroIsResetWithoutInterruptions() {
+        def fiveSecondsPomodoro = new Pomodoro(secondsLeft : 5)
+        
+        fiveSecondsPomodoro.start()
+        (1..5).each { fiveSecondsPomodoro.interrupt() }
+        Thread.sleep(3 * 1000)
+
+        // reset before finish        
+        fiveSecondsPomodoro.reset()
+        Thread.sleep(3 * 1000)
+        fiveSecondsPomodoro.interrupt()
+        assertEquals(1, fiveSecondsPomodoro.interruptions())
+    }
 }
