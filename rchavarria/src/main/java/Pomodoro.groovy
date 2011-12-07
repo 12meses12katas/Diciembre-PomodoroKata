@@ -1,3 +1,5 @@
+import java.util.concurrent.Executors;
+
 
 class Pomodoro {
     private static DEFAULT_SECONDS_LEFT = 25 * 60
@@ -9,11 +11,20 @@ class Pomodoro {
         secondsLeft
     }
     
-    public PomodoroStates getState() {
+    public synchronized PomodoroStates getState() {
         state
     }
     
     public void start() {
         state = PomodoroStates.ACTIVE
+        
+        new Thread().start {
+            Thread.sleep(secondsLeft * 1000)
+            setState(PomodoroStates.FINISHED)
+        }
+    }
+    
+    private synchronized setState(PomodoroStates newState) {
+        state = newState
     }
 }
