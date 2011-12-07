@@ -59,4 +59,10 @@ class PomodoroTest {
         Thread.sleep(2 * 1000)
         assertEquals(PomodoroStates.FINISHED, oneSecondPomodoro.getState())
     }
+    
+    @Test
+    public void testPomodoroIsInitializedWithoutInterruptions() {
+        assertEquals(0, pomodoro.interruptions())
+    }
+
 }

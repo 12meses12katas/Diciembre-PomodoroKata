@@ -27,4 +27,8 @@ class Pomodoro {
     private synchronized setState(PomodoroStates newState) {
         state = newState
     }
+    
+    public int interruptions() {
+        0
+    }
 }
