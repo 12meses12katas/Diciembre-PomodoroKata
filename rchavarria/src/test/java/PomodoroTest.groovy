@@ -64,5 +64,17 @@ class PomodoroTest {
     public void testPomodoroIsInitializedWithoutInterruptions() {
         assertEquals(0, pomodoro.interruptions())
     }
-
+        
+    @Test(expected=Exception.class)
+    public void testPomodoroDoesNotAllowInterruptionsIfNotStarted() {
+        pomodoro.interrupt()
+        
+        fail("pomodoro should not allow interruptions if it is not started")
+    }
+    
+    @Test
+    public void testPomodoroAllowInterruptionsIfStarted() {
+        pomodoro.start()
+        pomodoro.interrupt()
+    }
 }

@@ -31,4 +31,9 @@ class Pomodoro {
     public int interruptions() {
         0
     }
+    
+    public interrupt() {
+        if(! PomodoroStates.ACTIVE == getState())
+            throw new Exception("Pomodoro not started")
+    }
 }
