@@ -3,6 +3,8 @@ import static org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
+import com.sun.xml.internal.bind.v2.model.impl.ClassInfoImpl.SecondaryAnnotation;
+
 class PomodoroTest {
 
     def pomodoro
@@ -85,5 +87,24 @@ class PomodoroTest {
         def count = 5
         (1..count).each { pomodoro.interrupt() }
         assertEquals(count, pomodoro.interruptions())
+    }
+    
+    @Test
+    public void testStartedPomodoroCanBeReset() {
+        def fiveSecondsPomodoro = new Pomodoro(secondsLeft : 5)
+        
+        fiveSecondsPomodoro.start()
+        assertEquals(PomodoroStates.ACTIVE, fiveSecondsPomodoro.getState())
+        Thread.sleep(3 * 1000)
+        assertEquals(PomodoroStates.ACTIVE, fiveSecondsPomodoro.getState())
+
+        // reset before finish        
+        fiveSecondsPomodoro.reset()
+        Thread.sleep(3 * 1000)
+        //still active
+        assertEquals(PomodoroStates.ACTIVE, fiveSecondsPomodoro.getState())
+        Thread.sleep(3 * 1000)
+        
+        assertEquals(PomodoroStates.FINISHED, fiveSecondsPomodoro.getState())
     }
 }
