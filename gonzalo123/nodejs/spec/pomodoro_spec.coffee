@@ -8,7 +8,7 @@ describe 'jasmine-node', ->
     try
       do pom.stop
     catch error
-      expect("Pomodoro must be started").toEqual "Pomodoro must be started"
+      expect(error.message).toEqual "Pomodoro must be started"
 
   it '25 minutes by default', ->
     pom = new Pomodoro 25

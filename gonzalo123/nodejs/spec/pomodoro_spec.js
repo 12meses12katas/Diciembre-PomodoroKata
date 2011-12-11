@@ -13,7 +13,7 @@
       try {
         return pom.stop();
       } catch (error) {
-        return expect("Pomodoro must be started").toEqual("Pomodoro must be started");
+        return expect(error.message).toEqual("Pomodoro must be started");
       }
     });
     it('25 minutes by default', function() {
