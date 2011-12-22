@@ -1,0 +1,4 @@
+
+class PomodoroNotStartedException extends RuntimeException {
+
+}
