@@ -30,7 +30,7 @@ class Pomodoro
   end
 
   def stop
-    if self.started && !self.stopped # si ha empezado y no está parado
+    if self.started && !self.stopped
       self.interruptions += 1
       self.stopped = true
       Thread.kill(self.timer) if self.timer
