@@ -2,29 +2,36 @@ import java.util.concurrent.Executors;
 
 class Pomodoro {
     
+    private static ONE_SECOND = 1000
     private static SECONDS_LEFT = 25 * 60
     
     private secondsLeft = SECONDS_LEFT
     private state = PomodoroStates.STOPPED
+    private Timer timer = new Timer()
     private interruptions = 0
-    
-    public secondsLeft() {
-        secondsLeft
-    }
-    
-    public getState() {
-        state
-    }
+    private secondsCountDown
     
     public start() {
-        state = PomodoroStates.ACTIVE
-        interruptions = 0
-        
-        new Timer().schedule(new FinishPomodoroTask(), secondsLeft * 1000)
+        initFields()
+        initTimer()
     }
     
-    public interruptions() {
-        interruptions
+    private initFields() {
+        secondsCountDown = secondsLeft
+        state = PomodoroStates.ACTIVE
+        interruptions = 0
+    }
+    
+    private initTimer() {
+        cancelPreviousTimer()
+        timer = new Timer()
+        timer.schedule(new SecondsCountDownTask(), ONE_SECOND, ONE_SECOND)
+    }
+    
+    private cancelPreviousTimer(){
+        if(timer != null){
+            timer.cancel()
+        }
     }
     
     public interrupt() {
@@ -34,10 +41,13 @@ class Pomodoro {
         interruptions ++
     }
 
-    private class FinishPomodoroTask extends TimerTask {
+    private class SecondsCountDownTask extends TimerTask {
         @Override
         public void run() {
-            state = PomodoroStates.FINISHED
+            secondsCountDown --
+            
+            if(secondsCountDown == 0)
+                state = PomodoroStates.FINISHED
         }
     }
 }
