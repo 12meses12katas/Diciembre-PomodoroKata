@@ -60,9 +60,10 @@ describe Pomodoro do
 	end
 
 	it "un pomodoro acaba cuando se agota su tiempo" do
-		@pomodoro = Pomodoro.new(1)
+		puts "metodo error"
+		@pomodoro = Pomodoro.new(2)
 		@pomodoro.arrancar
-		sleep 5
+		sleep 6
 		@pomodoro.terminado?.should be_true
 	end
 
