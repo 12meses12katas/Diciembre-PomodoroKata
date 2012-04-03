@@ -4,7 +4,7 @@ class Pomodoro
     attr_reader :estado
     attr_reader :tiempo_transcurrido
     attr_reader :contador_interrupciones
-    @t
+    #@t
 
     def initialize(duracion = 25)
         @duracion = duracion
@@ -18,10 +18,12 @@ class Pomodoro
             @estado   = :arrancado
             
             @t = Thread.new do 
-              loop do 
-                terminar if @tiempo_transcurrido <= 0 
+              loop do
+                if @tiempo_transcurrido <= 0
+                    Thread.kill(@t)
+                    terminar
+                end
                 @tiempo_transcurrido -= 1 
-                puts "Tiempo: " + @tiempo_transcurrido.to_s
                 sleep 1
               end
             end            
@@ -32,7 +34,7 @@ class Pomodoro
         if @estado  == :arrancado then 
             @estado == :interrumpido
             @contador_interrupciones = @contador_interrupciones + 1
-            Thread.kill(@t)
+            Thread.kill(@t) if @t
         end
     end
 
@@ -51,14 +53,17 @@ class Pomodoro
     end
 
     def terminar
-        if (:tiempo_transcurrido <= 0)
+        if (@tiempo_transcurrido <= 0)
             @estado   = :terminado
-            Thread.kill(@t)
+            if (@t.alive?)
+                Thread.kill(@t) if @t
+                Raise
+            end
         end
     end
 
     def terminado?
-        if (@estado == :terminado)
+        if (@tiempo_transcurrido <= 0)
             true
         else
             false

@@ -20,7 +20,9 @@ describe Pomodoro do
 	end
 
 	it "un pomodoro se inicia sin interrupciones" do
+		@pomodoro = Pomodoro.new(1)
 		@pomodoro.arrancar
+		sleep 2
 		@pomodoro.contador_interrupciones.should == 0
 	end
 
@@ -30,19 +32,24 @@ describe Pomodoro do
 	end
 
 	it "un pomodoro cuenta las interrupciones" do
+		@pomodoro = Pomodoro.new(1)
 		@pomodoro.arrancar
+		sleep 2
 		@pomodoro.interrumpir
 		@pomodoro.contador_interrupciones.should > 0
 	end
 
 	it "un pomodoro se reinicia sin interrupciones" do
+		@pomodoro = Pomodoro.new(1)
 		@pomodoro.arrancar
+		sleep 2
 		@pomodoro.interrumpir
 		@pomodoro.reiniciar
 		@pomodoro.contador_interrupciones.should == 0
 	end
 
 	it "al arrancar el pomodoro  comienza la cuenta regresiva" do
+		@pomodoro = Pomodoro.new(1)
 		@pomodoro.arrancar
 		sleep 2
 		@pomodoro.tiempo_transcurrido.should < @pomodoro.duracion
@@ -65,6 +72,7 @@ describe Pomodoro do
 		@pomodoro.arrancar
 		sleep 6
 		@pomodoro.terminado?.should be_true
+		puts "acabo"
 	end
 
 end
