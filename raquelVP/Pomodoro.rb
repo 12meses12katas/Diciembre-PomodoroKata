@@ -1,5 +1,6 @@
 class Pomodoro
 
+    #atributos
     attr_reader :estado
     attr_reader :duracion        
     attr_reader :cant_interrupciones
@@ -13,7 +14,7 @@ class Pomodoro
         @cant_interrupciones = 0
     end
 
-    def iniciar
+    def comenzar
         if (@estado == :detenido or @estado == :interrumpido)
             @estado = :iniciado
             
@@ -30,6 +31,12 @@ class Pomodoro
         end
     end
 
+     def reiniciar
+        @tiempo_transcurrido = @duracion
+        @estado = :detenido
+        @cant_interrupciones = 0
+    end
+
     def interrumpir
         if @estado == :iniciado then
             @estado == :interrumpido
@@ -44,15 +51,9 @@ class Pomodoro
         else
             false
         end
-    end
+    end   
 
-    def reiniciar
-        @tiempo_transcurrido = @duracion
-        @estado = :detenido
-        @cant_interrupciones = 0
-    end
-
-    def terminar
+    def detener
         if (@tiempo_transcurrido <= 0)
             @estado = :terminado
             if (@t.alive?)
