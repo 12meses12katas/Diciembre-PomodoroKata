@@ -1,38 +1,52 @@
 class Pomodoro
-	
-	attr_reader :duracion
-	attr_reader :detenido
-	attr_accessor :iniciado
-	attr_reader :contador
-	attr_reader :terminado
-	attr_accessor :t1
+	attr_reader :duracion , :interrupciones, :estado
 
-	def initialize(duracion = 25)
+	def initialize(duracion=25)
 		@duracion = duracion
-		@detenido = :true
+		@estado = :parado
+		@interrupciones = 0
 	end
-	def iniciar()
-		self.iniciado = :false
-		@contador = @duracion
-		self.t1 = Thread.new do
-		 @duracion.times do
-		 	@contador -= 1
-		  #sleep(@duracion)
-		 end
+
+	def arrancar
+		a = Thread.new do 
+			while @duracion > 0 do 
+				@duracion -= 1; 
+				sleep 1
+			end
+		end
+		@estado = :arrancado
+	end
+
+	def termino?
+		if @estado != :arrancado
+			raise "Estado no arrancado"
+		end	
+
+		if @duracion <= 0
+			@estado = :parado
+		end			
+	end
+
+	def finalizar
+		if @duracion > 0
+			raise "Estado no finalizado"
 		end
 	end
 
-	def terminar()
-		if self.iniciado == :true
-			#Thread.kill(self.t1)
-			#@terminado = :true
-			puts "terminado"
+	def interrumpido?
+		@interrupciones > 0
+	end
 
-		else
-			raise_exception	 
+	def interrumpir
+		if @estado != :arrancado
+			raise "Estado no arrancado"
 		end
-		
-	end	
+		@interrupciones += 1
+	end
 
-	
+	def reiniciar
+		@interrupciones = 0
+		@duracion = 25
+		:arrancar
+	end
 end
