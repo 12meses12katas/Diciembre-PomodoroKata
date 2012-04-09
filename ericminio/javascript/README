@@ -1,0 +1,9 @@
+see it live:
+-----------
+http://ericminio-pomodoro.heroku.com
+
+run tests:
+---------
+bundle
+rake jasmine
+open http://localhost:8888
